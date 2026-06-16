@@ -37,44 +37,36 @@ It also keeps a quiet log of what it has already shown you, so it stops repeatin
 
 ## Before/After
 
-<p align="center">
-  <img src="assets/before-after.svg" width="760" alt="Normal Claude gives the answer. Claude with footnote gives the same answer plus a 'Learn next' line pointing to lockfile and transitive dependency." />
-</p>
-
 <table>
 <tr>
-<td width="50%">
+<th width="50%">Without footnote</th>
+<th width="50%">With footnote</th>
+</tr>
+<tr>
+<td>
 
-### Normal Claude
-
-> Done. I added the package and committed the lockfile.
+Done. I added the package and committed the lockfile.
 
 </td>
-<td width="50%">
+<td>
 
-### Claude with footnote
+Done. I added the package and committed the lockfile.
 
-> Done. I added the package and committed the lockfile.
->
-> Learn next: `lockfile (npm)`, `transitive dependency (npm)`
+**Learn next:** `lockfile (npm)`, `transitive dependency (npm)`
 
 </td>
 </tr>
 <tr>
 <td>
 
-### Normal Claude
-
-> Fixed it. The function was changing the array in place, so I made it return a new one instead.
+Fixed it. The function was changing the array in place, so I made it return a new one instead.
 
 </td>
 <td>
 
-### Claude with footnote
+Fixed it. The function was changing the array in place, so I made it return a new one instead.
 
-> Fixed it. The function was changing the array in place, so I made it return a new one instead.
->
-> Learn next: `mutation (js)`, `pure function (fp)`
+**Learn next:** `mutation (js)`, `pure function (fp)`
 
 </td>
 </tr>
