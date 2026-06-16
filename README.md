@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://em-content.zobj.net/source/apple/391/memo_1f4dd.png" width="96" alt="footnote" />
+</p>
+
 <h1 align="center">footnote</h1>
 
 <p align="center">
@@ -5,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ResolveZeticle/footnote/stargazers"><img src="https://img.shields.io/github/stars/ResolveZeticle/footnote?style=flat&color=blue" alt="Stars"></a>
-  <a href="https://github.com/ResolveZeticle/footnote/commits/main"><img src="https://img.shields.io/github/last-commit/ResolveZeticle/footnote?style=flat" alt="Last commit"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/ResolveZeticle/footnote?style=flat" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
+  <a href="#install"><img src="https://img.shields.io/badge/Claude%20Code-plugin-2d6cdf" alt="Claude Code plugin"></a>
+  <a href="#how-it-works"><img src="https://img.shields.io/badge/privacy-local--only-2ea44f" alt="Local only, no telemetry"></a>
 </p>
 
 <p align="center">
