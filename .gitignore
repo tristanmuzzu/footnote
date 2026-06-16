@@ -1,0 +1,15 @@
+# Dependencies (none expected — footnote ships plain Node scripts)
+node_modules/
+
+# Local learning-log copies, if you symlink one in for testing
+*.local.md
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor cruft
+.vscode/
+.idea/
+*.swp

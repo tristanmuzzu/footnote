@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "footnote",
+  "description": "Always-on learning companion for Claude Code — turns everyday coding into compounding knowledge.",
+  "owner": {
+    "name": "ResolveZeticle",
+    "url": "https://github.com/ResolveZeticle"
+  },
+  "plugins": [
+    {
+      "name": "footnote",
+      "description": "Claude teaches you dev fundamentals as you work. 'Learn next' hints plus a personal learning log that levels up over time.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

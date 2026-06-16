@@ -1,0 +1,7 @@
+# Normalize line endings — keep LF in the repo so Node shebangs and shell
+# scripts stay portable across Windows, macOS, and Linux.
+* text=auto eol=lf
+*.js  text eol=lf
+*.sh  text eol=lf
+*.md  text eol=lf
+*.json text eol=lf

@@ -1,0 +1,42 @@
+{
+  "name": "footnote",
+  "description": "Always-on learning companion. Claude appends short 'Learn next' hints for unfamiliar dev terms and keeps a personal learning log that promotes terms from 'seen' to 'learned' as you work.",
+  "version": "1.0.0",
+  "author": {
+    "name": "ResolveZeticle",
+    "url": "https://github.com/ResolveZeticle"
+  },
+  "homepage": "https://github.com/ResolveZeticle/footnote",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ResolveZeticle/footnote"
+  },
+  "license": "MIT",
+  "keywords": ["learning", "teaching", "education", "beginner", "mentor", "footnotes"],
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/footnote-activate.js",
+            "timeout": 5,
+            "statusMessage": "Loading footnote..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/footnote-mode-tracker.js",
+            "timeout": 5,
+            "statusMessage": "footnote"
+          }
+        ]
+      }
+    ]
+  }
+}
