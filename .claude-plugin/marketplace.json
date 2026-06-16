@@ -1,10 +1,11 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "footnote",
-  "description": "Always-on learning companion for Claude Code. Turns everyday coding into knowledge that compounds.",
   "owner": {
     "name": "tristanmuzzu",
     "url": "https://github.com/tristanmuzzu"
+  },
+  "metadata": {
+    "description": "Always-on learning companion for Claude Code. Turns everyday coding into knowledge that compounds."
   },
   "plugins": [
     {
