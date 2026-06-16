@@ -3,8 +3,8 @@
   "name": "footnote",
   "description": "Always-on learning companion for Claude Code. Turns everyday coding into knowledge that compounds.",
   "owner": {
-    "name": "ResolveZeticle",
-    "url": "https://github.com/ResolveZeticle"
+    "name": "tristanmuzzu",
+    "url": "https://github.com/tristanmuzzu"
   },
   "plugins": [
     {

@@ -97,14 +97,14 @@ It also keeps a quiet log of what it has already shown you, so it stops repeatin
 Inside Claude Code, run two commands:
 
 ```text
-/plugin marketplace add ResolveZeticle/footnote
+/plugin marketplace add tristanmuzzu/footnote
 /plugin install footnote@footnote
 ```
 
 Or from your terminal:
 
 ```bash
-claude plugin marketplace add ResolveZeticle/footnote
+claude plugin marketplace add tristanmuzzu/footnote
 claude plugin install footnote@footnote
 ```
 
