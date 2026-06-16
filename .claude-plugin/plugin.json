@@ -7,10 +7,7 @@
     "url": "https://github.com/tristanmuzzu"
   },
   "homepage": "https://github.com/tristanmuzzu/footnote",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tristanmuzzu/footnote"
-  },
+  "repository": "https://github.com/tristanmuzzu/footnote",
   "license": "MIT",
   "keywords": ["learning", "teaching", "education", "beginner", "mentor", "footnotes"],
   "hooks": {
