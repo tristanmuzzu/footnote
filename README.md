@@ -37,6 +37,10 @@ It also keeps a quiet log of what it has already shown you, so it stops repeatin
 
 ## Before/After
 
+<p align="center">
+  <img src="assets/before-after.svg" width="760" alt="Normal Claude gives the answer. Claude with footnote gives the same answer plus a 'Learn next' line pointing to lockfile and transitive dependency." />
+</p>
+
 <table>
 <tr>
 <td width="50%">

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect x="1" y="1" width="798" height="358" rx="16" fill="#0d1117" stroke="#21262d"/>
+
+  <!-- panel headers -->
+  <text x="32" y="46" fill="#8b949e" font-size="13" font-weight="700" letter-spacing="1">NORMAL CLAUDE</text>
+  <text x="432" y="46" fill="#58a6ff" font-size="13" font-weight="700" letter-spacing="1">CLAUDE + FOOTNOTE</text>
+
+  <!-- divider -->
+  <line x1="400" y1="64" x2="400" y2="300" stroke="#21262d" stroke-width="1"/>
+
+  <!-- left: plain answer -->
+  <text x="32" y="100" fill="#c9d1d9" font-size="16">Done. I added the package and</text>
+  <text x="32" y="124" fill="#c9d1d9" font-size="16">committed the lockfile.</text>
+
+  <!-- right: same answer -->
+  <text x="432" y="100" fill="#c9d1d9" font-size="16">Done. I added the package and</text>
+  <text x="432" y="124" fill="#c9d1d9" font-size="16">committed the lockfile.</text>
+
+  <!-- right: the footnote -->
+  <text x="432" y="178" fill="#58a6ff" font-size="14" font-weight="700">Learn next:</text>
+  <rect x="432" y="192" width="150" height="30" rx="8" fill="#161b22" stroke="#30363d"/>
+  <text x="447" y="212" fill="#c9d1d9" font-size="14" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">lockfile (npm)</text>
+  <rect x="432" y="230" width="262" height="30" rx="8" fill="#161b22" stroke="#30363d"/>
+  <text x="447" y="250" fill="#c9d1d9" font-size="14" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">transitive dependency (npm)</text>
+
+  <!-- caption -->
+  <text x="400" y="336" fill="#8b949e" font-size="14" text-anchor="middle">same answer, you just walk away knowing a little more</text>
+</svg>
