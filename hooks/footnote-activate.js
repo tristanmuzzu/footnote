@@ -99,6 +99,7 @@ let out =
   '  2. A "Seen once" term that genuinely recurs in real work: move it to "## Learned" ' +
   '(the user now knows it, so never surface it again).\n' +
   '  3. Never surface a term already under "## Learned".\n' +
+  '  4. APPEND-ONLY: this file is a permanent record. Only ADD a new term, or move one from "## Seen once" to "## Learned". NEVER delete existing terms, reorder, reformat, restamp dates, or rewrite the header, and do not consolidate or prune it. If a structural change seems needed, ask the user first.\n' +
   "The user can type 'footnote off' to mute, 'footnote on' to resume.";
 
 if (seen.trim()) {

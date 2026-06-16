@@ -51,6 +51,13 @@ Maintain the file with your normal file tools (Read, Edit, Write). Read it once
 per session before surfacing the line so dedup and promotion are correct. The
 SessionStart hook injects the current lists, so you usually won't need a fresh read.
 
+**Append-only — never clobber.** This file is the user's permanent learning record.
+Only ADD a new term, or move one term from "Seen once" to "Learned". NEVER delete
+existing terms, reorder, reformat, restamp dates, or rewrite the header, and never
+"consolidate" or prune it. If a structural change ever seems needed, ask the user
+first. This is what stops an unrelated memory-consolidation step, or a future
+session, from silently erasing terms the user hasn't reviewed yet.
+
 ## Controls
 
 - `footnote off` (also `/learn off`, `stop footnote`) mutes it. Claude stops

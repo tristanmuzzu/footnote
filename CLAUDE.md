@@ -34,6 +34,12 @@ honest. If a feature ships or is removed, update the table.
 - **Non-destructive:** only read and write under `~/.claude/footnote/`. Never touch
   the user's other files. This is why footnote does NOT use
   `~/.claude/learning-log.md`, which a user may already maintain by hand.
+- **Append-only log:** never delete, prune, reorder, reformat, or restamp entries in
+  the learning log; only add a term or promote one from Seen once to Learned. The
+  user's term history must never shrink. The hook's injected rules and SKILL.md both
+  state this, so keep all three in sync. This is the guarantee that protects a user's
+  backlog from being silently erased by a future session or an unrelated
+  memory-consolidation skill.
 - **Silent-fail hooks:** every filesystem operation is wrapped so a failure can
   never block session start or a prompt.
 - **Token discipline:** the injected context is kept lean, and the `Learned` list

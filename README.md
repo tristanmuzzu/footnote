@@ -127,6 +127,8 @@ It's just a Markdown file at `~/.claude/footnote/learning-log.md`:
 
 Read it, edit it, back it up, or delete it. footnote rebuilds it next session if it's gone.
 
+footnote only ever **adds** to this file. It appends new terms and promotes them as you learn, but it never deletes terms you've collected or rewrites the file. Your backlog is safe.
+
 ## Make it yours
 
 footnote is MIT licensed and built to be forked. The behavior lives in two small, readable files:
