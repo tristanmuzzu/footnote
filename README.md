@@ -1,124 +1,145 @@
-# footnote
+<h1 align="center">footnote</h1>
 
-**Your AI coding assistant should teach you, not just do your homework.**
+<p align="center">
+  <strong>the more you know</strong>
+</p>
 
-footnote is a tiny Claude Code plugin. While you work, Claude quietly leaves a
-**footnote** — a short *"Learn next"* line — whenever it uses a term, tool, or
-convention a beginner wouldn't know yet. It also keeps a private **learning log**
-that remembers what it has shown you, so the hints get smarter over time and stop
-repeating things you already know.
+<p align="center">
+  <a href="https://github.com/ResolveZeticle/footnote/stargazers"><img src="https://img.shields.io/github/stars/ResolveZeticle/footnote?style=flat&color=blue" alt="Stars"></a>
+  <a href="https://github.com/ResolveZeticle/footnote/commits/main"><img src="https://img.shields.io/github/last-commit/ResolveZeticle/footnote?style=flat" alt="Last commit"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/ResolveZeticle/footnote?style=flat" alt="License"></a>
+</p>
 
-No course. No flashcards to maintain. You just keep coding, and you keep learning.
+<p align="center">
+  <a href="#beforeafter">Before/After</a> &nbsp;•&nbsp;
+  <a href="#install">Install</a> &nbsp;•&nbsp;
+  <a href="#how-it-works">How it works</a> &nbsp;•&nbsp;
+  <a href="#make-it-yours">Make it yours</a>
+</p>
 
 ---
 
-## Before / after
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that teaches you while you code.
 
-**Without footnote:**
+When Claude answers and reaches for a word a beginner wouldn't know yet (a tool, a command, some bit of jargon), it leaves a small footnote at the bottom pointing you to it. No definitions, just the term and a hint about where it lives, so you can look it up when you feel like it. Do that for a few weeks and the stuff that used to read like magic starts to make sense.
 
-> Done — I added the dependency and committed the lockfile.
+It also keeps a quiet log of what it has already shown you, so it stops repeating things you know and the hints get sharper over time.
 
-**With footnote:**
+> "You miss 100% of the words you don't look up."
+>
+> *Wayne Gretzky*
+>
+> *Michael Scott*
 
-> Done — I added the dependency and committed the lockfile.
+## Before/After
+
+<table>
+<tr>
+<td width="50%">
+
+### Normal Claude
+
+> Done. I added the package and committed the lockfile.
+
+</td>
+<td width="50%">
+
+### Claude with footnote
+
+> Done. I added the package and committed the lockfile.
 >
 > Learn next: `lockfile (npm)`, `transitive dependency (npm)`
 
-That's it. Two words and a hint about where they live. You look them up when you
-feel like it. Over weeks, the things that used to look like magic become things
-you understand.
+</td>
+</tr>
+<tr>
+<td>
 
----
+### Normal Claude
+
+> Fixed it. The function was changing the array in place, so I made it return a new one instead.
+
+</td>
+<td>
+
+### Claude with footnote
+
+> Fixed it. The function was changing the array in place, so I made it return a new one instead.
+>
+> Learn next: `mutation (js)`, `pure function (fp)`
+
+</td>
+</tr>
+</table>
+
+**Same answer. You just walk away knowing a little more than you did.**
 
 ## What you get
 
-| Feature | What it does |
+| | |
 | --- | --- |
-| **Always-on hints** | A short `Learn next:` line appears only when a reply actually uses unfamiliar jargon. Never padded, never a lecture. |
-| **A learning log** | Terms move from **Seen once** → **Learned** as they come up again in real work. Learned terms stop being surfaced. |
-| **Yours, and private** | The log lives on your machine at `~/.claude/footnote/learning-log.md`. No network. No telemetry. Nothing leaves your computer. |
-| **Easy mute** | Type `footnote off` to pause it, `footnote on` to bring it back. |
-| **Cross-platform** | The hooks are plain Node.js — they run the same on Windows, macOS, and Linux. |
-
----
+| **Footnotes that know when to shut up** | A `Learn next` line shows up only when a reply genuinely uses a word you might not know. No spam, no lectures, capped at two. |
+| **A memory** | Terms move from *Seen once* to *Learned* as they come up again in real work. Once you've met something enough, footnote stops pointing it out. |
+| **It's yours, and it's private** | Your log lives on your own machine at `~/.claude/footnote/learning-log.md`. No network calls. No analytics. Nothing leaves your computer. |
+| **Mute whenever** | Type `footnote off` to pause it, `footnote on` to bring it back. |
+| **Runs anywhere** | The hooks are plain Node, so they behave the same on Windows, macOS, and Linux. |
 
 ## Install
 
-In Claude Code, run these two commands:
+Inside Claude Code, run two commands:
 
 ```text
 /plugin marketplace add ResolveZeticle/footnote
 /plugin install footnote@footnote
 ```
 
-That's it. Open a new session and footnote is on. (It needs Node.js available on
-your `PATH` — if you use Claude Code you almost certainly already have it.)
+Or from your terminal:
 
----
+```bash
+claude plugin marketplace add ResolveZeticle/footnote
+claude plugin install footnote@footnote
+```
 
-## How it works (plain English)
+Open a fresh session and it's on. You'll need Node on your `PATH`, which you almost certainly already have if you're running Claude Code.
 
-Claude Code lets a plugin run a small script when a session starts. footnote's
-script does three quiet things:
+## How it works
 
-1. **Makes sure your learning log exists** (creating it the first time).
-2. **Tells Claude the rules** for leaving a good footnote — names + a search hint,
-   max two, and *only* when something is genuinely new.
-3. **Hands Claude your current log** so it knows what you've already seen and what
-   you've already learned.
+No mystery here. Claude Code lets a plugin run a small script when a session starts. footnote's script does three quiet things:
 
-Everything happens on your machine. The script makes **no network calls** and
-collects **no analytics** — you can read all ~120 lines of it in
-[`hooks/footnote-activate.js`](hooks/footnote-activate.js).
+1. Makes sure your learning log exists, creating it the first time.
+2. Hands Claude the rules for a good footnote: a term plus a search hint, two at most, and only when something is genuinely new.
+3. Shows Claude your current log so it knows what you've already seen and already learned.
 
----
-
-## Controls
-
-| Type this | Effect |
-| --- | --- |
-| `footnote off` | Mute the hints (persists across sessions) |
-| `footnote on` | Turn them back on |
-
-(`/learn off` and `/learn on` work too.)
-
----
+All of it happens on your machine. The script makes zero network calls and collects nothing about you. It's about 120 lines and you can read every one in [`hooks/footnote-activate.js`](hooks/footnote-activate.js).
 
 ## Your learning log
 
-Stored at `~/.claude/footnote/learning-log.md`:
+It's just a Markdown file at `~/.claude/footnote/learning-log.md`:
 
 ```markdown
 ## Seen once
-- lockfile (npm) — 2026-06-16
-- hoisting (js) — 2026-06-16
+- lockfile (npm) · 2026-06-16
+- hoisting (js) · 2026-06-16
 
 ## Learned
-- worktree (git) — 2026-06-16
+- worktree (git) · 2026-06-16
 ```
 
-It's just a Markdown file. Read it, edit it, back it up, or delete it whenever you
-like — footnote will rebuild it next session.
+Read it, edit it, back it up, or delete it. footnote rebuilds it next session if it's gone.
 
----
+## Make it yours
 
-## Make it your own
+footnote is MIT licensed and built to be forked. The behavior lives in two small, readable files:
 
-footnote is MIT-licensed and meant to be forked. The behavior lives in two small,
-readable places:
+- [`hooks/footnote-activate.js`](hooks/footnote-activate.js) sends Claude the rules each session.
+- [`skills/footnote/SKILL.md`](skills/footnote/SKILL.md) spells the behavior out in plain language.
 
-- [`hooks/footnote-activate.js`](hooks/footnote-activate.js) — the rules Claude
-  receives each session.
-- [`skills/footnote/SKILL.md`](skills/footnote/SKILL.md) — the full, human-readable
-  spec of the behavior.
+Want hints tuned for data science instead of web dev? A different log format? A weekly recap? Change those two files, push your fork, and point your own `claude plugin marketplace add <you>/footnote` at it. The layout is in [CONTRIBUTING](CONTRIBUTING.md).
 
-Want hints tuned for data science instead of web dev? A different log format? A
-weekly recap? Fork it, change those files, point your own
-`/plugin marketplace add <you>/footnote` at it. See
-[CONTRIBUTING](CONTRIBUTING.md) for the layout.
+## Star it
 
----
+If footnote teaches you something you're glad to know, a star helps other people find it. ⭐
 
 ## License
 
-[MIT](LICENSE) — do whatever you want with it.
+MIT. Take it, fork it, make it yours.

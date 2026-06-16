@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "footnote",
-  "description": "Always-on learning companion for Claude Code — turns everyday coding into compounding knowledge.",
+  "description": "Always-on learning companion for Claude Code. Turns everyday coding into knowledge that compounds.",
   "owner": {
     "name": "ResolveZeticle",
     "url": "https://github.com/ResolveZeticle"

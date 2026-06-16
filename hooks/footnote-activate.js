@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-// footnote — Claude Code SessionStart hook
+// footnote: Claude Code SessionStart hook
 //
 // Runs once at the start of every session:
 //   1. Ensures the personal learning log exists (creates it if missing).
 //   2. Respects the mute flag ("footnote off").
-//   3. Emits the "Learn next" teaching rules + the user's current log as
+//   3. Emits the "Learn next" teaching rules plus the user's current log as
 //      hidden SessionStart context, so Claude can surface and track terms.
 //
 // Privacy: everything stays on this machine. No network. No telemetry.
-// Reliability: silent-fails on every filesystem error — never blocks a session.
+// Reliability: silent-fails on every filesystem error, so it never blocks a session.
 
 const fs = require('fs');
 const path = require('path');
@@ -18,12 +18,12 @@ const dir = path.join(os.homedir(), '.claude', 'footnote');
 const logPath = path.join(dir, 'learning-log.md');
 const flagPath = path.join(dir, 'active');
 
-const LOG_TEMPLATE = `<!-- footnote learning log — format v1 — lines: "- term (tag) — YYYY-MM-DD" -->
-# Footnote — Your Learning Log
+const LOG_TEMPLATE = `<!-- footnote learning log · format v1 · lines: "- term (tag) · YYYY-MM-DD" -->
+# Footnote: Your Learning Log
 
 Terms Claude has surfaced to you while you work.
-- "Seen once" = shown to you a first time.
-- "Learned" = it recurred in real work, so you've met it enough — Claude won't surface it again.
+- "Seen once" means it was shown to you a first time.
+- "Learned" means it recurred in real work, so you've met it enough and Claude won't surface it again.
 
 ## Seen once
 
@@ -40,7 +40,7 @@ try {
   fs.mkdirSync(dir, { recursive: true });
   if (!fs.existsSync(logPath)) fs.writeFileSync(logPath, LOG_TEMPLATE);
 } catch (e) {
-  // Silent fail — never block session start.
+  // Silent fail, so we never block session start.
 }
 
 // 2. Respect the mute flag.
@@ -50,7 +50,7 @@ try {
     muted = true;
   }
 } catch (e) {
-  // Ignore — treat as active.
+  // Ignore and treat as active.
 }
 
 if (muted) {
@@ -79,25 +79,26 @@ try {
   seen = seenLines.join('\n');
   learned = learnedLines.join('\n');
 } catch (e) {
-  // Ignore — inject the rules without log state.
+  // Ignore and inject the rules without log state.
 }
 
-// 4. Emit the teaching rules (kept short on purpose) + log state.
+// 4. Emit the teaching rules (kept short on purpose) plus log state.
 const today = todayISO();
 let out =
-  'FOOTNOTE MODE ACTIVE — learning companion.\n' +
+  'FOOTNOTE MODE ACTIVE. You are a learning companion.\n' +
   'When a reply uses a dev term, tool, command, or convention a beginner likely does not know yet, ' +
   'append a final line:\n' +
   '  Learn next: `term1 (tag)`, `term2 (tag)`\n' +
-  'Rules: names + a 1-word domain tag only (e.g. `lockfile (npm)`, `hoisting (js)`) — NO definitions, ' +
-  'the user looks each up. Max 2, most-useful-first. Omit the line entirely when nothing qualifies — never pad. ' +
+  'Rules: names plus a 1-word domain tag only (for example `lockfile (npm)`, `hoisting (js)`). ' +
+  'No definitions, the user looks each up. Max 2, most useful first. ' +
+  'Omit the line entirely when nothing qualifies, and never pad. ' +
   'Only surface terms genuinely new to a learner AND actually used this turn. Skip trivial replies.\n' +
   'Today is ' + today + '.\n' +
   'Maintain the learning log with your file tools at:\n  ' + logPath + '\n' +
-  '  - A new term you surfaced -> add `- term (tag) — ' + today + '` under "## Seen once".\n' +
-  '  - A "Seen once" term that genuinely recurs in real work -> move it to "## Learned" ' +
-  '(the user now knows it; never surface it again).\n' +
-  '  - Never surface a term already under "## Learned".\n' +
+  '  1. A new term you surfaced: add `- term (tag) · ' + today + '` under "## Seen once".\n' +
+  '  2. A "Seen once" term that genuinely recurs in real work: move it to "## Learned" ' +
+  '(the user now knows it, so never surface it again).\n' +
+  '  3. Never surface a term already under "## Learned".\n' +
   "The user can type 'footnote off' to mute, 'footnote on' to resume.";
 
 if (seen.trim()) {
@@ -106,7 +107,7 @@ if (seen.trim()) {
 if (learned.trim()) {
   out +=
     "\n\nAlready \"## Learned\" (never surface again)" +
-    (learnedExtra ? ' — showing the latest 150; ' + learnedExtra + ' more are in the log file' : '') +
+    (learnedExtra ? ', showing the latest 150 with ' + learnedExtra + ' more in the log file' : '') +
     ':\n' +
     learned;
 }

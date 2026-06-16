@@ -12,4 +12,4 @@ What would you like footnote to do?
 What problem does it solve for someone learning to code?
 
 **Rough shape (optional)**
-Any thoughts on how it might work — a new log format, a recap, per-domain hints, etc.
+Any thoughts on how it might work, like a new log format, a recap, or per-domain hints.
