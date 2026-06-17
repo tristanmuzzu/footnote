@@ -1,7 +1,7 @@
 {
   "name": "footnote",
-  "description": "Always-on learning companion. Claude appends short 'Learn next' hints for unfamiliar dev terms and keeps a personal learning log that promotes terms from 'seen' to 'learned' as you work.",
-  "version": "1.0.0",
+  "description": "Always-on learning companion with spaced repetition. Claude leaves short 'Learn next' hints for unfamiliar dev terms, then re-surfaces them for a quick recall check at growing intervals so they actually stick.",
+  "version": "2.0.0",
   "author": {
     "name": "tristanmuzzu",
     "url": "https://github.com/tristanmuzzu"

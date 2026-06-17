@@ -27,7 +27,7 @@ A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) plugin that teac
 
 When Claude answers and reaches for a word a beginner wouldn't know yet (a tool, a command, some bit of jargon), it leaves a small footnote at the bottom pointing you to it. No definitions, just the term and a hint about where it lives, so you can look it up when you feel like it. Do that for a few weeks and the stuff that used to read like magic starts to make sense.
 
-It also keeps a quiet log of what it has already shown you, so it stops repeating things you know and the hints get sharper over time.
+Then it does the part that actually makes things stick: it brings each term back for a quick recall check at growing intervals (spaced repetition), so you meet it a few times over weeks instead of seeing it once and forgetting it. Everything it shows you lives in a local log it only ever adds to.
 
 > "You miss 100% of the words you don't look up."
 >
@@ -79,7 +79,8 @@ Fixed it. The function was changing the array in place, so I made it return a ne
 | | |
 | --- | --- |
 | **Footnotes that know when to shut up** | A `Learn next` line shows up only when a reply genuinely uses a word you might not know. No spam, no lectures, capped at two. |
-| **A memory** | Terms move from *Seen once* to *Learned* as they come up again in real work. Once you've met something enough, footnote stops pointing it out. |
+| **Spaced repetition** | Terms come back for a quick recall check at growing intervals (a day, a few days, a week, a month) until they stick, then graduate to *Learned*. Seeing a word twice and forgetting it is exactly what this fixes. |
+| **Stays out of your way** | New-term hints come at the *end* of a reply; the spaced review is one short check at *session start*, never mid-task. It injects only what's due, so it never bloats your context. |
 | **It's yours, and it's private** | Your log lives on your own machine at `~/.claude/footnote/learning-log.md`. No network calls. No analytics. Nothing leaves your computer. |
 | **Mute whenever** | Type `footnote off` to pause it, `footnote on` to bring it back. |
 | **Runs anywhere** | The hooks are plain Node, so they behave the same on Windows, macOS, and Linux. |
@@ -104,13 +105,13 @@ Open a fresh session and it's on. You'll need Node on your `PATH`, which you alm
 
 ## How it works
 
-No mystery here. Claude Code lets a plugin run a small script when a session starts. footnote's script does three quiet things:
+No mystery here. Claude Code lets a plugin run a small script when a session starts, and that script is the deterministic brain:
 
-1. Makes sure your learning log exists, creating it the first time.
-2. Hands Claude the rules for a good footnote: a term plus a search hint, two at most, and only when something is genuinely new.
-3. Shows Claude your current log so it knows what you've already seen and already learned.
+1. Makes sure your learning log exists (and keeps rolling backups of it, just in case).
+2. Works out which terms are *due* for a refresh today and hands Claude a short list (at most three), plus the rules for a good footnote.
+3. As you work, Claude leaves "Learn next" hints for genuinely new words, and runs that short recall check once at the start.
 
-All of it happens on your machine. The script makes zero network calls and collects nothing about you. It's about 120 lines and you can read every one in [`hooks/footnote-activate.js`](hooks/footnote-activate.js).
+All the scheduling and dates are done by the script, not the model, so it stays reliable and doesn't pull attention off your actual task. And it only ever feeds Claude what's due, never your whole log, so it stays light as your list grows. Everything happens on your machine: zero network calls, nothing collected. You can read the whole thing in [`hooks/footnote-activate.js`](hooks/footnote-activate.js).
 
 ## Your learning log
 
@@ -125,7 +126,7 @@ It's just a Markdown file at `~/.claude/footnote/learning-log.md`:
 - worktree (git) · 2026-06-16
 ```
 
-Read it, edit it, back it up, or delete it. footnote rebuilds it next session if it's gone.
+`## Seen once` is the rotation it's still quizzing you on; `## Learned` is what has stuck. Read it, edit it, back it up, or delete it (footnote rebuilds it next session if it's gone). The spacing schedule lives in a separate hidden file beside it, so this one stays clean and human-readable.
 
 footnote only ever **adds** to this file. It appends new terms and promotes them as you learn, but it never deletes terms you've collected or rewrites the file. Your backlog is safe.
 
