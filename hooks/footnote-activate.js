@@ -80,6 +80,12 @@ function run() {
   const learnedKeys = new Set(learnedDisplays.map(canonicalKey).filter(Boolean));
   const inLog = new Set([...seenKeys, ...learnedKeys]);
 
+  // Canonical key -> the user-facing display name (with its tag). The schedule
+  // is keyed canonically, but the review must show the real name + tag, since
+  // the tag is a recall hint and the stripped key is hard to recognize.
+  const keyToDisplay = {};
+  for (const d of seenDisplays) { const k = canonicalKey(d); if (k) keyToDisplay[k] = d; }
+
   const state = { version: 2, terms: {} };
   // Seen-once terms: carry forward progress, else start fresh at stage 0.
   for (const key of seenKeys) {
@@ -181,7 +187,7 @@ function run() {
       (due.length > 1 ? 's' : '') + ' before and ' + (due.length > 1 ? "they're" : "it's") +
       ' due for a refresh. In ONE short block, ask the user to recall each before peeking, then let them look it up if fuzzy. ' +
       'No lecture, no logging, no promotion - the hook handles all of that.\n';
-    for (const x of due) out += '  - ' + x.key + '\n';
+    for (const x of due) out += '  - ' + (keyToDisplay[x.key] || x.key) + '\n';
   }
 
   if (graduated.length) {

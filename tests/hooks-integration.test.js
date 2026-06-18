@@ -125,6 +125,23 @@ test('activate: graduates a term past the last interval (markdown move, count pr
   assert.match(out, /moved 1 term/);
 });
 
+test('activate: review shows the display name + tag, not the stripped canonical key', () => {
+  const s = sandbox();
+  fs.writeFileSync(s.logPath, '# log\n\n## Seen once\n- ReadWriteOnce (k8s) · 2026-01-01\n- free/busy (calendar) · 2026-01-01\n\n## Learned\n');
+  // both due now (overdue), keyed canonically in the schedule
+  fs.writeFileSync(path.join(s.home, 'schedule.json'), JSON.stringify({
+    version: 2,
+    terms: {
+      readwriteonce: { stage: 1, timesSeen: 1, lastSeen: '2026-01-01', nextDue: '2026-01-02', section: 'seen' },
+      'free busy': { stage: 1, timesSeen: 1, lastSeen: '2026-01-01', nextDue: '2026-01-02', section: 'seen' },
+    },
+  }));
+  const out = runActivate(s.env);
+  assert.match(out, /ReadWriteOnce \(k8s\)/);   // real name + tag, not "readwriteonce"
+  assert.match(out, /free\/busy \(calendar\)/); // slash + tag preserved, not "free busy"
+  assert.ok(!/- readwriteonce$/m.test(out), 'must not print the stripped canonical key as the review item');
+});
+
 test('append-only: count never decreases across harvest + activate', () => {
   const s = sandbox();
   const tp = path.join(s.home, 't.jsonl');
