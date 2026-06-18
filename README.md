@@ -105,13 +105,12 @@ Open a fresh session and it's on. You'll need Node on your `PATH`, which you alm
 
 ## How it works
 
-No mystery here. Claude Code lets a plugin run a small script when a session starts, and that script is the deterministic brain:
+No mystery here. Claude Code lets a plugin run small scripts at certain moments, and those scripts do all the bookkeeping so Claude can stay focused on your actual question. Two of them:
 
-1. Makes sure your learning log exists (and keeps rolling backups of it, just in case).
-2. Works out which terms are *due* for a refresh today and hands Claude a short list (at most three), plus the rules for a good footnote.
-3. As you work, Claude leaves "Learn next" hints for genuinely new words, and runs that short recall check once at the start.
+1. **At session start**, a scheduler makes sure your log exists (and keeps rolling backups), works out which terms are *due* for a refresh today, hands Claude a short list (at most three) plus the rules for a good footnote, and quietly moves any term that has stuck into *Learned*.
+2. **When a reply finishes**, a harvester reads the "Learn next" line off the end of it and adds any genuinely new terms to your log. It recognizes a term you already have even if it is named a little differently, so your log never fills up with near-duplicates.
 
-All the scheduling and dates are done by the script, not the model, so it stays reliable and doesn't pull attention off your actual task. And it only ever feeds Claude what's due, never your whole log, so it stays light as your list grows. Everything happens on your machine: zero network calls, nothing collected. You can read the whole thing in [`hooks/footnote-activate.js`](hooks/footnote-activate.js).
+That split is the whole point: Claude just leaves hints and runs the recall check, while the scripts handle the dates, the writing, and the deduplication. They only ever feed Claude what is due, never your whole log, so it stays light as your list grows. Everything happens on your machine: zero network calls, nothing collected. The logic lives in a few short, readable files under [`hooks/`](hooks/).
 
 ## Your learning log
 
@@ -132,12 +131,14 @@ footnote only ever **adds** to this file. It appends new terms and promotes them
 
 ## Make it yours
 
-footnote is MIT licensed and built to be forked. The behavior lives in two small, readable files:
+footnote is MIT licensed and built to be forked. The behavior lives in a handful of small, readable files:
 
-- [`hooks/footnote-activate.js`](hooks/footnote-activate.js) sends Claude the rules each session.
+- [`hooks/footnote-activate.js`](hooks/footnote-activate.js) is the session-start scheduler (what's due, the rules, promotions).
+- [`hooks/footnote-harvest.js`](hooks/footnote-harvest.js) is the harvester that captures new terms when a reply ends.
+- [`hooks/lib/`](hooks/lib) holds the pure, unit-tested pieces (dedup, transcript parsing, log editing).
 - [`skills/footnote/SKILL.md`](skills/footnote/SKILL.md) spells the behavior out in plain language.
 
-Want hints tuned for data science instead of web dev? A different log format? A weekly recap? Change those two files, push your fork, and point your own `claude plugin marketplace add <you>/footnote` at it. The layout is in [CONTRIBUTING](CONTRIBUTING.md).
+Want hints tuned for data science instead of web dev? A different log format? A weekly recap? Change those files, run `npm test` to make sure you didn't break anything, push your fork, and point your own `claude plugin marketplace add <you>/footnote` at it. The layout is in [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Star it
 

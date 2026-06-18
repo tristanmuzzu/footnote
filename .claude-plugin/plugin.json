@@ -1,7 +1,7 @@
 {
   "name": "footnote",
-  "description": "Always-on learning companion with spaced repetition. Claude leaves short 'Learn next' hints for unfamiliar dev terms, then re-surfaces them for a quick recall check at growing intervals so they actually stick.",
-  "version": "2.0.0",
+  "description": "Always-on learning companion with spaced repetition. Claude leaves short 'Learn next' hints for unfamiliar dev terms; hooks then capture, dedupe, and re-surface them for a quick recall check at growing intervals so they actually stick.",
+  "version": "2.1.0",
   "author": {
     "name": "tristanmuzzu",
     "url": "https://github.com/tristanmuzzu"
@@ -30,6 +30,18 @@
             "type": "command",
             "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/footnote-mode-tracker.js",
             "timeout": 5,
+            "statusMessage": "footnote"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/footnote-harvest.js",
+            "timeout": 10,
             "statusMessage": "footnote"
           }
         ]
