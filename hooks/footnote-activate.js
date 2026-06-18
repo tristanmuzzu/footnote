@@ -201,12 +201,12 @@ if (due.length) {
     (due.length > 1 ? 's' : '') + ' before and ' + (due.length > 1 ? "they're" : "it's") +
     ' due for a refresh. In ONE short block, ask the user to recall each before peeking, then let them look it up if fuzzy. No lecture.\n';
   for (const x of due) out += '  - ' + x.term + '\n';
-  out += 'If the user clearly knows one well, move it to "## Learned" as `- term (tag) · learned' + t + '`.\n';
+  out += 'If the user clearly knows one well, move it to "## Learned" as `- term (tag) · learned ' + t + '`.\n';
 }
 
 if (graduated.length) {
   out += '\nGRADUATED (survived the review ladder): move ' + (graduated.length > 1 ? 'these' : 'this') +
-    ' from "## Seen once" to "## Learned" (as `- term (tag) · learned' + t + '`):\n';
+    ' from "## Seen once" to "## Learned" (as `- term (tag) · learned ' + t + '`):\n';
   for (const term of graduated) out += '  - ' + term + '\n';
 }
 
